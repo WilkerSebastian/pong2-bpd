@@ -1,0 +1,19 @@
+{
+    "name": "pong2-bpd",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build -c vite.config.ts",
+        "preview": "vite preview",
+        "make": "npm run build && gamasource build"
+    },
+    "devDependencies": {
+        "typescript": "^5.4.5",
+        "vite": "^5.2.10"
+    },
+    "dependencies": {
+        "gamasource": "^0.4.0-alpha"
+    }
+}
