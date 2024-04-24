@@ -1,11 +1,11 @@
-import { GamaSource, GameObject, KeyBoard, SquareSprite, Vector2 } from "gamasource";
-import isNotExitWorld from "./isNotExitWorld";
+import { BoxCollider2D, GamaSource, GameObject, KeyBoard, SquareSprite, Vector2 } from "gamasource";
 
 export default class Player extends GameObject {
 
     private player1 = false
     private speed = 5 * GamaSource.window.getScale();
     private sprite = new SquareSprite(50, 100, "#fff")
+    private collider = new BoxCollider2D()
 
     start() {
 
@@ -20,6 +20,7 @@ export default class Player extends GameObject {
         this.transform.set(this.player1 ? GamaSource.window.WIDTH * 0.1 : GamaSource.window.WIDTH * 0.9, GamaSource.window.HEIGHT / 2)
         
         this.setComponent("Rendering", this.sprite)
+        this.setComponent("Collision", this.collider)
 
     }
 
@@ -52,12 +53,8 @@ export default class Player extends GameObject {
 
         }
     
-        if (isNotExitWorld(this.transform.add(direction), this.sprite)) {
-
-            this.transform.x += direction.x
-            this.transform.y += direction.y
-
-        }
+        this.transform.x += direction.x
+        this.transform.y += direction.y
 
     }
 
