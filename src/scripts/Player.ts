@@ -1,4 +1,5 @@
 import { BoxCollider2D, GamaSource, GameObject, KeyBoard, SquareSprite, Vector2 } from "gamasource";
+import Bar from "./Bar";
 
 export default class Player extends GameObject {
 
@@ -52,9 +53,21 @@ export default class Player extends GameObject {
                 direction.y += this.speed
 
         }
-    
-        this.transform.x += direction.x
+
         this.transform.y += direction.y
+
+    } 
+
+    protected onCollisionBetween(gameObject: GameObject): void {
+        
+        if (gameObject instanceof Bar) {
+
+            const top = 50
+            const down = gameObject.transform.y - this.sprite.height
+
+            this.transform.y = gameObject.transform.y == 0 ? top : down
+
+        }
 
     }
 

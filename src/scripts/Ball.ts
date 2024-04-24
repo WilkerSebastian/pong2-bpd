@@ -18,8 +18,9 @@ export default class Ball extends GameObject {
     }
 
     protected onCollisionBetween(gameObject: GameObject): void {
-        
 
+        this.velocity.x *= -GameMath.randomInteger(1, 1)
+        this.velocity.y *= -GameMath.randomInteger(1, 1)
 
     }
 
