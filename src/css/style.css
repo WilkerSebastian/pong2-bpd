@@ -1,3 +1,17 @@
+@font-face{
+
+    font-family: home;
+    src: url(/public/Maze.ttf);
+
+}
+
+@font-face{
+
+    font-family: spit;
+    src: url(/public/Spit.ttf);
+
+}
+
 * {
 
     padding: 0;
@@ -33,7 +47,7 @@
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 3%;
+    margin-top: 1%;
     color: var(--white-main-menu);
 
 }
@@ -42,12 +56,15 @@
 
     text-align: center;
     font-size: 15rem;
+    font-family: home;
 
 }
 
 .sub-title {
 
     text-align: center;
+    font-family: home;
+    font-size: 4.5rem;
 
 }
 
@@ -56,20 +73,31 @@
 
     position: relative;
     border: 1px solid var(--white-main-menu);
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5%;
+    width: 25%;
 }
 
 .btn-option {
 
+    font-size: 3.5rem;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: var(--white-main-menu);
     border: 1px solid var(--white-main-menu);
     background-color: var(--black-main-menu);
-    padding: 5px;
-    margin: auto;
+    padding: 7.5px;
+    margin: 1vw;
+    z-index: 5;
+
+}
+
+.btn-option:hover {
+
+    scale: 1.05;
 
 }
 
