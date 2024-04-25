@@ -88,9 +88,12 @@ export default class Skill {
 
         this.player.sprite.height *= 2
 
+        this.player.speed /= 1.1
+
         setTimeout(() => {
             
             this.player.sprite.height /= 2
+            this.player.speed *= 1.1
             this.time_load = 0
             this.used = false
             

@@ -22,5 +22,3 @@ game.addScene("main", () => {
         GameObject.create(Bar)
 
 })
-
-game.run()

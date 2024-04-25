@@ -1,4 +1,4 @@
-import { GameMath } from "gamasource";
+import { GamaSource, GameMath } from "gamasource";
 import Player from "./Player";
 
 export default class Boote extends Player {
@@ -39,7 +39,8 @@ export default class Boote extends Player {
 
         }
 
-        this.transform.y += this.direction * this.speed
+        if (GamaSource.globalEnv.get("timeRunning"))
+            this.transform.y += this.direction * this.speed
 
     }
 
