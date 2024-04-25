@@ -1,5 +1,6 @@
 import { BoxCollider2D, GamaSource, GameObject, KeyBoard, SquareSprite, Vector2 } from "gamasource";
 import Bar from "./Bar";
+import Skill from "./Skill";
 
 export default class Player extends GameObject {
 
@@ -7,6 +8,7 @@ export default class Player extends GameObject {
     private speed = 5 * GamaSource.window.getScale();
     private sprite = new SquareSprite(50, 100, "#fff")
     private collider = new BoxCollider2D()
+    private skill = new Skill("BREAK_TIME", this)
     public points = 0
 
     start() {
@@ -28,9 +30,30 @@ export default class Player extends GameObject {
 
     update() {
 
-        if (GamaSource.globalEnv.get("timeRunning"))
+        if (GamaSource.globalEnv.get("timeRunning") || this.skill.getType() == "BREAK_TIME") {
+            
             this.movement()
+
+            this.skillAction()
+
+        }
         
+    }
+
+    skillAction() {
+
+        if (this.player1) {
+
+            if(KeyBoard.getKeyDown("g") || KeyBoard.getKeyDown("G")) 
+                this.skill.use()
+
+            return
+
+        }
+
+        if(KeyBoard.getKeyDown("k") || KeyBoard.getKeyDown("K")) 
+            this.skill.use()
+
     }
 
     movement() {

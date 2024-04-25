@@ -93,10 +93,9 @@ export default class Ball extends GameObject {
 
     update(): void {
 
-        this.applyVelocity()
+        if (GamaSource.globalEnv.get("timeRunning"))
+            this.applyVelocity()
         
-        
-
     }
 
     applyVelocity() {
