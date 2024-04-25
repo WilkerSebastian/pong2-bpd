@@ -38,6 +38,8 @@ export default class Player extends GameObject {
             this.skillAction()
 
         }
+
+        this.collisionWall()
         
     }
 
@@ -104,7 +106,30 @@ export default class Player extends GameObject {
 
     } 
 
+    private collisionWall() {
+
+        if (this.player1) {
+
+            if (this.transform.x + this.sprite.width >= GamaSource.window.WIDTH / 2)
+                this.transform.x = (GamaSource.window.WIDTH / 2) - this.sprite.width
+
+            else if (this.transform.x < 50)
+                this.transform.x = 50
+
+        } else {
+
+            if (this.transform.x <= GamaSource.window.WIDTH / 2)
+                this.transform.x = (GamaSource.window.WIDTH / 2) + this.sprite.width
+
+            else if (this.transform.x + this.sprite.width > GamaSource.window.WIDTH - 50)
+                this.transform.x = GamaSource.window.WIDTH - 50 - this.sprite.width
+
+        }
+
+    }
+
     protected onCollisionBetween(gameObject: GameObject): void {
+
         
         if (gameObject instanceof Bar) {
 
