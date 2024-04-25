@@ -21,7 +21,7 @@ export default class Bar extends GameObject {
         this.setComponent("Collision", this.collider)
 
         Bar.index++
-        this.indentifier++
+        this.indentifier = Bar.index
 
     }
 

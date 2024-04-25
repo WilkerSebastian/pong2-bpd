@@ -7,6 +7,7 @@ export default class Player extends GameObject {
     private speed = 5 * GamaSource.window.getScale();
     private sprite = new SquareSprite(50, 100, "#fff")
     private collider = new BoxCollider2D()
+    public points = 0
 
     start() {
 
@@ -17,9 +18,9 @@ export default class Player extends GameObject {
 
         }
             
-
         this.transform.set(this.player1 ? GamaSource.window.WIDTH * 0.1 : GamaSource.window.WIDTH * 0.9, GamaSource.window.HEIGHT / 2)
-        
+        this.tag = this.player1 ? "player1" : "player2"
+
         this.setComponent("Rendering", this.sprite)
         this.setComponent("Collision", this.collider)
 
@@ -68,6 +69,16 @@ export default class Player extends GameObject {
             this.transform.y = gameObject.transform.y == 0 ? top : down
 
         }
+
+    }
+
+    render() {
+        super.render()
+
+        GamaSource.ctx.font = "40px ARIAL"
+        GamaSource.ctx.fillText(this.player1 ? `${this.points} |` : this.points.toString(), 
+        this.player1 ? (GamaSource.window.WIDTH / 2) - 40 : (GamaSource.window.WIDTH / 2) + 20, 
+        100)
 
     }
 

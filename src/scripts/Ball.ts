@@ -32,10 +32,25 @@ export default class Ball extends GameObject {
 
         if (gameObject instanceof Bar) {
 
-            console.log(gameObject.indentifier);
-
-            if(gameObject.indentifier == 1 || gameObject.indentifier == 3)
+            if (gameObject.indentifier == 1 || gameObject.indentifier == 4)
                 this.direction.y *= -1
+
+            else {
+
+                const player1 = GameObject.getElementByTag<Player>("player1")!
+                const player2 = GameObject.getElementByTag<Player>("player2")!
+
+                if (gameObject.indentifier == 2)
+                    player1.points++;
+
+                else
+                    player2.points++;
+
+                player1.start()
+                player2.start()
+                this.start()
+
+            }
 
         } else if (gameObject instanceof Player) {
 
