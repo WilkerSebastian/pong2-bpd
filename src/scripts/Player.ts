@@ -6,10 +6,11 @@ export default class Player extends GameObject {
 
     private player1 = false
     private collider = new BoxCollider2D()
-    private skill = new Skill("BIG_STICK", this)
+    private skill = new Skill("VECTOR_FREEDOM", this)
     public sprite = new SquareSprite(50, 100, "#fff")
     public speed = 5 * GamaSource.window.getScale();
     public points = 0
+    public horizontal_move = false
 
     start() {
 
@@ -68,6 +69,16 @@ export default class Player extends GameObject {
             if (KeyBoard.getKeyDown("s") || KeyBoard.getKeyDown("S"))
                 direction.y += this.speed
 
+            if (this.horizontal_move) {
+
+                if (KeyBoard.getKeyDown("a") || KeyBoard.getKeyDown("A"))
+                    direction.x -= this.speed
+
+                if (KeyBoard.getKeyDown("d") || KeyBoard.getKeyDown("D"))
+                    direction.x += this.speed
+
+            }
+
         } else {
 
             if (KeyBoard.getKeyDown("ArrowUp"))
@@ -76,9 +87,20 @@ export default class Player extends GameObject {
             if (KeyBoard.getKeyDown("ArrowDown"))
                 direction.y += this.speed
 
+            if (this.horizontal_move) {
+
+                if (KeyBoard.getKeyDown("ArrowLeft"))
+                    direction.x -= this.speed
+
+                if (KeyBoard.getKeyDown("ArrowRight"))
+                    direction.x += this.speed
+
+            }
+
         }
 
         this.transform.y += direction.y
+        this.transform.x += direction.x
 
     } 
 

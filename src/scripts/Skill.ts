@@ -29,6 +29,10 @@ export default class Skill {
                 this.big_stick()
 
                 break;
+             case "VECTOR_FREEDOM":
+                    this.vector_freedom()
+    
+                    break;
         }
 
     }
@@ -65,6 +69,14 @@ export default class Skill {
         this.player.sprite.height *= 1.125
 
         setTimeout(() => this.player.sprite.height /= 1.125, 10000)
+
+    }
+
+    private vector_freedom() {
+
+        this.player.horizontal_move = true
+
+        setTimeout(() => this.player.horizontal_move = false, 7000)
 
     }
 
