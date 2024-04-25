@@ -5,9 +5,9 @@ import Skill from "./Skill";
 export default class Player extends GameObject {
 
     private player1 = false
-    private sprite = new SquareSprite(50, 100, "#fff")
     private collider = new BoxCollider2D()
-    private skill = new Skill("ZAAS", this)
+    private skill = new Skill("BIG_STICK", this)
+    public sprite = new SquareSprite(50, 100, "#fff")
     public speed = 5 * GamaSource.window.getScale();
     public points = 0
 

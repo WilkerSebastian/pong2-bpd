@@ -25,6 +25,10 @@ export default class Skill {
                 
                 this.zaas()
                 break;
+            case "BIG_STICK":
+                this.big_stick()
+
+                break;
         }
 
     }
@@ -53,6 +57,14 @@ export default class Skill {
             ball.velocity.y /= 1.1
 
         }, 7500)
+
+    }
+
+    private big_stick() {
+
+        this.player.sprite.height *= 1.125
+
+        setTimeout(() => this.player.sprite.height /= 1.125, 10000)
 
     }
 
