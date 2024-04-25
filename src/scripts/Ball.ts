@@ -6,11 +6,13 @@ export default class Ball extends GameObject {
 
     private sprite = new SquareSprite(50, 50, "#fff")
     private collider = new BoxCollider2D()
-    private velocity = new Vector2(5, 5)
     private direction = new Vector2(0, 0)
     private lastCollision:GameObject | null = null
+    public velocity = new Vector2(5, 5)
 
     start(): void {
+
+        this.tag = "BALL"
 
         this.transform.set(GamaSource.window.WIDTH / 2, GamaSource.window.HEIGHT / 2)
 

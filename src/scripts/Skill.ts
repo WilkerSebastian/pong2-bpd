@@ -1,5 +1,6 @@
-import { GamaSource } from "gamasource";
+import { GamaSource, GameObject } from "gamasource";
 import Player from "./Player";
+import Ball from "./Ball";
 
 export default class Skill {
 
@@ -20,6 +21,10 @@ export default class Skill {
                 
                 this.break_time()
                 break;
+            case "ZAAS":
+                
+                this.zaas()
+                break;
         }
 
     }
@@ -32,6 +37,25 @@ export default class Skill {
 
     }
 
+    private zaas() {
+
+        const ball = GameObject.getElementByTag<Ball>("BALL")!
+
+        this.player.speed *= 1.1
+        ball.velocity.x *= 1.1
+        ball.velocity.y *= 1.1
+        
+
+        setTimeout(() => {
+
+            this.player.speed /= 1.1
+            ball.velocity.x /= 1.1
+            ball.velocity.y /= 1.1
+
+        }, 7500)
+
+    }
+
     public getType() {
 
         return this.type
@@ -41,4 +65,4 @@ export default class Skill {
 
 }
 
-export type SkillTypes = "BREAK_TIME" | "RETICON" | "BIG_STICK" | "VECTOR_FREEDOM"
+export type SkillTypes = "BREAK_TIME" | "ZAAS" | "BIG_STICK" | "VECTOR_FREEDOM"
