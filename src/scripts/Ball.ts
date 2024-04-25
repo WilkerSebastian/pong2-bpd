@@ -15,8 +15,8 @@ export default class Ball extends GameObject {
         this.transform.set(GamaSource.window.WIDTH / 2, GamaSource.window.HEIGHT / 2)
 
         this.direction.set(
-            GameMath.randomInteger(0, 1) == 1 ? 1 : -1,
-            GameMath.randomInteger(0, 1) == 1 ? 1 : -1
+            GameMath.randomInteger(0, 100) % 2 == 0  ? 1 : -1,
+            GameMath.randomInteger(0, 100) % 2 == 0 ? 1 : -1
         )
         
         this.setComponent("Rendering", this.sprite)

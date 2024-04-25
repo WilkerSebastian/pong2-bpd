@@ -19,9 +19,6 @@ game.addScene("main", () => {
 
     for (let i = 0;i < 4;i++)
         GameObject.create(Bar)
-    
-    console.log(GamaSource.GameObjects);
-    
 
 })
 
