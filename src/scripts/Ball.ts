@@ -43,10 +43,10 @@ export default class Ball extends GameObject {
                 const player2 = GameObject.getElementByTag<Player>("player2")!
 
                 if (gameObject.indentifier == 2) 
-                    player1.addPoints();
+                    player2.addPoints();
 
                 else
-                    player2.addPoints();
+                    player1.addPoints();
 
                 player1.start()
                 player2.start()

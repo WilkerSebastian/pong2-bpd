@@ -6,7 +6,7 @@ export default class Player extends GameObject {
 
     private player1 = false
     private collider = new BoxCollider2D()
-    private skill = new Skill("VECTOR_FREEDOM", this)
+    protected skill = new Skill("ZAAS", this)
     private points = 0
     public sprite = new SquareSprite(50, 100, "#fff")
     public speed = 5 * GamaSource.window.getScale();

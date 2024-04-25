@@ -43,6 +43,8 @@ export default class Skill {
                     break;
         }
 
+        this.used = true
+
     }
 
     private break_time() {
@@ -63,16 +65,18 @@ export default class Skill {
 
         const ball = GameObject.getElementByTag<Ball>("BALL")!
 
-        this.player.speed *= 1.1
-        ball.velocity.x *= 1.1
-        ball.velocity.y *= 1.1
+        const boost = 1.75
+
+        this.player.speed *= boost
+        ball.velocity.x *= boost
+        ball.velocity.y *= boost
         
 
         setTimeout(() => {
 
-            this.player.speed /= 1.1
-            ball.velocity.x /= 1.1
-            ball.velocity.y /= 1.1
+            this.player.speed /= boost
+            ball.velocity.x /= boost
+            ball.velocity.y /= boost
             this.time_load = 0
             this.used = false
 
@@ -82,11 +86,11 @@ export default class Skill {
 
     private big_stick() {
 
-        this.player.sprite.height *= 1.125
+        this.player.sprite.height *= 2
 
         setTimeout(() => {
             
-            this.player.sprite.height /= 1.125
+            this.player.sprite.height /= 2
             this.time_load = 0
             this.used = false
             
@@ -121,7 +125,11 @@ export default class Skill {
 
     }
 
+    public setSkill(skill:SkillTypes) {
 
+        this.type = skill
+
+    }
 
     public getPorcentSkill() {
 
