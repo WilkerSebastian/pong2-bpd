@@ -5,6 +5,7 @@ export default class Bar extends GameObject {
     private static index = 0
     private sprite: Sprite | null = null
     private collider = new BoxCollider2D()
+    public indentifier = 0
 
     start(): void {
 
@@ -20,6 +21,7 @@ export default class Bar extends GameObject {
         this.setComponent("Collision", this.collider)
 
         Bar.index++
+        this.indentifier++
 
     }
 
