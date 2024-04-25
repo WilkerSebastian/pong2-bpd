@@ -7,9 +7,9 @@ export default class Player extends GameObject {
     private player1 = false
     private collider = new BoxCollider2D()
     private skill = new Skill("VECTOR_FREEDOM", this)
+    private points = 0
     public sprite = new SquareSprite(50, 100, "#fff")
     public speed = 5 * GamaSource.window.getScale();
-    public points = 0
     public horizontal_move = false
 
     start() {
@@ -40,7 +40,15 @@ export default class Player extends GameObject {
         }
 
         this.collisionWall()
+
+        this.skillUpdate(10)
         
+    }
+
+    public skillUpdate(time:number) {
+
+        this.skill.addTime(time)
+
     }
 
     skillAction() {
@@ -149,6 +157,22 @@ export default class Player extends GameObject {
         GamaSource.ctx.fillText(this.player1 ? `${this.points} |` : this.points.toString(), 
         this.player1 ? (GamaSource.window.WIDTH / 2) - 40 : (GamaSource.window.WIDTH / 2) + 20, 
         100)
+
+        const xBar = this.player1 ? 50 : GamaSource.window.WIDTH - 250
+        const yBar = 50
+
+        GamaSource.ctx.fillStyle = "#404040"
+        GamaSource.ctx.fillRect(xBar, yBar, 200, 25)
+
+        GamaSource.ctx.fillStyle = "#FFD830"
+        GamaSource.ctx.fillRect(xBar, yBar, 200 * this.skill.getPorcentSkill(), 25)
+
+    }
+
+    public addPoints() {
+
+        this.points++
+        this.skillUpdate(1000)
 
     }
 

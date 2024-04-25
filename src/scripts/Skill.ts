@@ -6,15 +6,23 @@ export default class Skill {
 
     private type:SkillTypes
     private player:Player
+    private MAX_TIME_SKILL:number
+    private time_load:number
+    private used = false
 
     constructor(nameSkill:SkillTypes, reference:Player) {
 
         this.type = nameSkill
         this.player = reference        
+        this.MAX_TIME_SKILL = this.getMaxTime()
+        this.time_load = 0
 
     }
 
     public use() {
+
+        if (this.used || this.time_load != this.MAX_TIME_SKILL)
+            return
 
         switch (this.type) {
             case "BREAK_TIME":
@@ -41,7 +49,13 @@ export default class Skill {
 
         GamaSource.globalEnv.set("timeRunning", false)
 
-        setTimeout(() => GamaSource.globalEnv.set("timeRunning", true), 2000)
+        setTimeout(() => {
+            
+            GamaSource.globalEnv.set("timeRunning", true)
+            this.time_load = 0
+            this.used = false
+            
+        }, 2000)
 
     }
 
@@ -59,6 +73,8 @@ export default class Skill {
             this.player.speed /= 1.1
             ball.velocity.x /= 1.1
             ball.velocity.y /= 1.1
+            this.time_load = 0
+            this.used = false
 
         }, 7500)
 
@@ -68,7 +84,13 @@ export default class Skill {
 
         this.player.sprite.height *= 1.125
 
-        setTimeout(() => this.player.sprite.height /= 1.125, 10000)
+        setTimeout(() => {
+            
+            this.player.sprite.height /= 1.125
+            this.time_load = 0
+            this.used = false
+            
+        }, 10000)
 
     }
 
@@ -76,7 +98,52 @@ export default class Skill {
 
         this.player.horizontal_move = true
 
-        setTimeout(() => this.player.horizontal_move = false, 7000)
+        setTimeout(() => {
+            
+            this.player.horizontal_move = false
+            this.time_load = 0
+            this.used = false
+            
+        }, 7000)
+
+    }
+
+    public addTime(time:number) {
+
+        if (this.time_load + time > this.MAX_TIME_SKILL) {
+
+            this.time_load = this.MAX_TIME_SKILL
+            return
+        
+        }
+
+        this.time_load += time
+
+    }
+
+
+
+    public getPorcentSkill() {
+
+        return this.time_load / this.MAX_TIME_SKILL
+
+    }
+
+    private getMaxTime() {
+
+        switch (this.type) {
+            case "BREAK_TIME":
+                return 8000
+
+            case "ZAAS":
+                return 10000    
+            
+            case "BIG_STICK":
+                return 6000
+
+             case "VECTOR_FREEDOM":
+                return 10000
+        }
 
     }
 
@@ -85,7 +152,6 @@ export default class Skill {
         return this.type
 
     }
-
 
 }
 
