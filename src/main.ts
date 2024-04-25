@@ -9,12 +9,17 @@ const game = new GamaSource({
 })
 
 GamaSource.globalEnv.set("timeRunning", true)
+GamaSource.globalEnv.set("boote", false)
 
 game.addScene("main", () => {
 
     GameObject.create(Player)
 
-    GameObject.create(Boote)
+    if (GamaSource.globalEnv.get("boote"))
+        GameObject.create(Boote)
+    
+    else
+        GameObject.create(Player)
 
     GameObject.create(Ball)
 
@@ -22,3 +27,31 @@ game.addScene("main", () => {
         GameObject.create(Bar)
 
 })
+
+document.querySelectorAll<HTMLButtonElement>(".btn-option").forEach(b => b.addEventListener("click", () => {
+
+    const res = b.getAttribute("res")!
+
+    switch (res) {
+
+        case "pvp":
+
+            document.getElementById("main-menu")!.style.display = "none"
+
+            game.run()
+
+            break;
+
+        case "pia":
+
+            document.getElementById("main-menu")!.style.display = "none"
+
+            GamaSource.globalEnv.set("boote", true)
+
+            game.run()
+
+            break;
+
+    }
+
+}))
