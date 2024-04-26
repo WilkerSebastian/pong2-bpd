@@ -5,136 +5,61 @@ import Bar from "./scripts/Bar"
 import Boote from "./scripts/Boote"
 import { selectSkill } from "./ui/selectSkill"
 import reborn from "./assets/audio/reborn.wav"
+import { controls_view } from "./ui/controls"
 
-let start = false
-let game:GamaSource
+let boote = false
 
 GamaSource.globalEnv.set("timeRunning", true)
 
 GamaSource.loader(reborn)
 
-/*window.addEventListener("keydown", k => {
+const game = new GamaSource({
+    background: "#000"
+})
 
-    if (k.key == "Escape" && start) {
+game.addScene("main", () => {
 
-        const $escape = document.getElementById("escape-menu")!
+    const background = new AudioPlayer("reborn.wav", 35)
 
-        if ($escape.style.display == "none") {
+    background.setEventEnd(() => {
 
-            GamaSource.stop()
+        background.playTo(11, 52)
 
-            open_escape_menu()
+    })
 
-            return
+    background.playTo(0, 52)
 
-        } 
+    GameObject.create(Player)
+    
+    GameObject.create(boote ? Boote : Player)
 
-        $escape.style.display = "none"
+    GameObject.create(Ball)
 
-        GamaSource.resume()
+    for (let i = 0;i < 4;i++)
+        GameObject.create(Bar)
 
-    }
-        
-
-})*/
+})
 
 document.querySelectorAll<HTMLButtonElement>(".btn-option").forEach(b => b.addEventListener("click", async() => {
 
-    let canvas = document.querySelector("canvas")
-
-    if (canvas)
-        canvas.remove()
-
     const res = b.getAttribute("res")!
 
-    switch (res) {
+    if (res == "pvp") {
 
-        case "pvp":
+        GamaSource.globalEnv.set("player1_skill", await selectSkill(true))
 
-            start = false
+        GamaSource.globalEnv.set("player2_skill", await selectSkill(false))
 
-            GamaSource.globalEnv.set("player1_skill", await selectSkill(true))
+    } else {
 
-            GamaSource.globalEnv.set("player2_skill", await selectSkill(false))
+        GamaSource.globalEnv.set("player1_skill", await selectSkill(true))
 
-            document.getElementById("skill-select")!.style.display = "none"
-
-            GamaSource.GameObjects = new Array<GameObject>()
-
-            game = new GamaSource({
-                background: "#000"
-            })
-            
-            game.addScene("main", () => {
-            
-                start = true
-            
-                const background = new AudioPlayer("reborn.wav", 35)
-            
-                background.setEventEnd(() => {
-            
-                    background.playTo(11, 52)
-            
-                })
-            
-                background.playTo(0, 52)
-            
-                GameObject.create(Player)
-                
-                GameObject.create(Player)
-            
-                GameObject.create(Ball)
-            
-                for (let i = 0;i < 4;i++)
-                    GameObject.create(Bar)
-            
-            })
-
-            game.run()
-
-            break;
-
-        case "pia":
-
-            GamaSource.globalEnv.set("player1_skill", await selectSkill(true))
-
-            document.getElementById("skill-select")!.style.display = "none"
-
-            GamaSource.GameObjects = new Array<GameObject>()
-
-            game = new GamaSource({
-                background: "#000"
-            })
-            
-            game.addScene("main", () => {
-            
-                start = true
-            
-                const background = new AudioPlayer("reborn.wav", 35)
-            
-                background.setEventEnd(() => {
-            
-                    background.playTo(11, 52)
-            
-                })
-            
-                background.playTo(0, 52)
-            
-                GameObject.create(Player)
-            
-                GameObject.create(Boote)
-            
-                GameObject.create(Ball)
-            
-                for (let i = 0;i < 4;i++)
-                    GameObject.create(Bar)
-            
-            })
-
-            game.run()
-
-            break;
+        boote = true
 
     }
+
+    await controls_view()
+
+    game.run()
 
 }))

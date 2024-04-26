@@ -14,7 +14,9 @@ export default class Ball extends GameObject {
 
         this.tag = "BALL"
 
-        this.velocity.set(5,5)
+        const realtive = GamaSource.window.HEIGHT / 160
+
+        this.velocity.set(realtive, realtive)
 
         this.transform.set(GamaSource.window.WIDTH / 2, GamaSource.window.HEIGHT / 2)
 

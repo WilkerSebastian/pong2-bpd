@@ -8,8 +8,8 @@ export default class Player extends GameObject {
     private collider = new BoxCollider2D()
     protected skill = new Skill("BIG_STICK", this)
     private points = 0
-    public sprite = new SquareSprite(50, 100, "#fff")
-    public speed = 5 * GamaSource.window.getScale();
+    public sprite = new SquareSprite(50, GamaSource.window.HEIGHT / 6, "#fff")
+    public speed = GamaSource.window.HEIGHT / 120;
     public horizontal_move = false
 
     start() {
@@ -21,7 +21,7 @@ export default class Player extends GameObject {
 
         }
             
-        this.transform.set(this.player1 ? GamaSource.window.WIDTH * 0.1 : GamaSource.window.WIDTH * 0.9, GamaSource.window.HEIGHT / 2)
+        this.transform.set(this.player1 ? 150 : GamaSource.window.WIDTH - 150, GamaSource.window.HEIGHT / 2)
         this.tag = this.player1 ? "player1" : "player2"
 
         this.skill.setSkill(this.player1 ? GamaSource.globalEnv.get("player1_skill") : GamaSource.globalEnv.get("player2_skill"))
@@ -158,7 +158,7 @@ export default class Player extends GameObject {
         const p1 = GameObject.getElementByTag<Player>("player1")!.points
         const p2 = GameObject.getElementByTag<Player>("player2")!.points
 
-        GamaSource.ctx.font = "40px ARIAL"
+        GamaSource.ctx.font = "40px pixel"
         GamaSource.ctx.fillText(`${p1} | ${p2}`, 
         (GamaSource.window.WIDTH / 2) - 50, 
         100)

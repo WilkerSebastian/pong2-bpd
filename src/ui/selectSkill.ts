@@ -15,6 +15,8 @@ export function selectSkill(player1:boolean) {
 
                 const skt = b.getAttribute("skill") as SkillTypes
 
+                document.getElementById("skill-select")!.style.display = "none"
+
                 resolve(skt)
 
             }, {once:true})
