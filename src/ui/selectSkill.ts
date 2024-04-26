@@ -11,7 +11,7 @@ export function selectSkill(player1:boolean) {
 
         document.querySelectorAll<HTMLButtonElement>(".card")!.forEach(b => {
 
-            b.addEventListener("click", e => {
+            b.addEventListener("click", () => {
 
                 const skt = b.getAttribute("skill") as SkillTypes
 

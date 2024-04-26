@@ -6,7 +6,7 @@ export function controls_view() {
 
     return new Promise<void>(resolve => {
 
-        document.querySelector<HTMLButtonElement>("#controls-close")!.addEventListener("click", e => {
+        document.querySelector<HTMLButtonElement>("#controls-close")!.addEventListener("click", () => {
 
             $controls.style.display = "none"
 
