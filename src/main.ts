@@ -19,7 +19,7 @@ const game = new GamaSource({
 
 game.addScene("main", () => {
 
-    const background = new AudioPlayer("reborn.wav", 35)
+    const background = new AudioPlayer("reborn.wav", 25)
 
     background.setEventEnd(() => {
 
