@@ -1,4 +1,4 @@
-import { BoxCollider2D, GamaSource, GameObject, KeyBoard, SquareSprite, Vector2 } from "gamasource";
+import { BoxCollider2D, GamaSource, GameMath, GameObject, KeyBoard, SquareSprite, Vector2 } from "gamasource";
 import Bar from "./Bar";
 import Skill from "./Skill";
 
@@ -155,9 +155,12 @@ export default class Player extends GameObject {
     render() {
         super.render()
 
+        const p1 = GameObject.getElementByTag<Player>("player1")!.points
+        const p2 = GameObject.getElementByTag<Player>("player2")!.points
+
         GamaSource.ctx.font = "40px ARIAL"
-        GamaSource.ctx.fillText(this.player1 ? `${this.points} |` : this.points.toString(), 
-        this.player1 ? (GamaSource.window.WIDTH / 2) - 40 : (GamaSource.window.WIDTH / 2) + 20, 
+        GamaSource.ctx.fillText(`${p1} | ${p2}`, 
+        (GamaSource.window.WIDTH / 2) - 50, 
         100)
 
         const xBar = this.player1 ? 50 : GamaSource.window.WIDTH - 250
@@ -166,7 +169,12 @@ export default class Player extends GameObject {
         GamaSource.ctx.fillStyle = "#404040"
         GamaSource.ctx.fillRect(xBar, yBar, 200, 25)
 
-        GamaSource.ctx.fillStyle = "#FFD830"
+        if (this.skill.getUsed())
+            GamaSource.ctx.fillStyle = GameMath.randomInteger(0,100) % 2 == 0 ? "#FFD830" : "#F4F279"
+
+        else
+            GamaSource.ctx.fillStyle = "#FFD830"
+
         GamaSource.ctx.fillRect(xBar, yBar, 200 * this.skill.getPorcentSkill(), 25)
 
     }

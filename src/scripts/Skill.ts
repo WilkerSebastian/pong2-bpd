@@ -164,6 +164,12 @@ export default class Skill {
 
     }
 
+    public getUsed() {
+
+        return this.used
+
+    }
+
 }
 
 export type SkillTypes = "BREAK_TIME" | "ZAAS" | "BIG_STICK" | "VECTOR_FREEDOM"
