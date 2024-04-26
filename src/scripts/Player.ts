@@ -8,7 +8,7 @@ export default class Player extends GameObject {
     private collider = new BoxCollider2D()
     protected skill = new Skill("BIG_STICK", this)
     private points = 0
-    public sprite = new SquareSprite(50, GamaSource.window.HEIGHT / 6, "#fff")
+    public sprite = new SquareSprite(GamaSource.window.WIDTH  * 0.04, GamaSource.window.HEIGHT * 0.18, "#fff")
     public speed = GamaSource.window.HEIGHT / 120;
     public horizontal_move = false
 
@@ -118,21 +118,23 @@ export default class Player extends GameObject {
 
     private collisionWall() {
 
+        const side = GamaSource.window.WIDTH  * 0.04
+
         if (this.player1) {
 
             if (this.transform.x + this.sprite.width >= GamaSource.window.WIDTH / 2)
                 this.transform.x = (GamaSource.window.WIDTH / 2) - this.sprite.width
 
-            else if (this.transform.x < 50)
-                this.transform.x = 50
+            else if (this.transform.x < side)
+                this.transform.x = side
 
         } else {
 
             if (this.transform.x <= GamaSource.window.WIDTH / 2)
                 this.transform.x = (GamaSource.window.WIDTH / 2) + this.sprite.width
 
-            else if (this.transform.x + this.sprite.width > GamaSource.window.WIDTH - 50)
-                this.transform.x = GamaSource.window.WIDTH - 50 - this.sprite.width
+            else if (this.transform.x + this.sprite.width > GamaSource.window.WIDTH - side)
+                this.transform.x = GamaSource.window.WIDTH - side - this.sprite.width
 
         }
 
@@ -143,7 +145,7 @@ export default class Player extends GameObject {
         
         if (gameObject instanceof Bar) {
 
-            const top = 50
+            const top = GamaSource.window.WIDTH * 0.01
             const down = gameObject.transform.y - this.sprite.height
 
             this.transform.y = gameObject.transform.y == 0 ? top : down
@@ -155,19 +157,21 @@ export default class Player extends GameObject {
     render() {
         super.render()
 
+        const sizeBar = GamaSource.window.WIDTH * 0.01
+
         const p1 = GameObject.getElementByTag<Player>("player1")!.points
         const p2 = GameObject.getElementByTag<Player>("player2")!.points
 
-        GamaSource.ctx.font = "40px pixel"
+        GamaSource.ctx.font = `${sizeBar * 3}px pixel`
         GamaSource.ctx.fillText(`${p1} | ${p2}`, 
-        (GamaSource.window.WIDTH / 2) - 50, 
-        100)
+        (GamaSource.window.WIDTH / 2) - sizeBar * 5, 
+        sizeBar * 5)
 
-        const xBar = this.player1 ? 50 : GamaSource.window.WIDTH - 250
-        const yBar = 50
+        const xBar = this.player1 ? sizeBar : GamaSource.window.WIDTH - sizeBar - (GamaSource.window.WIDTH * 0.2) 
+        const yBar = GamaSource.window.WIDTH * 0.01
 
         GamaSource.ctx.fillStyle = "#404040"
-        GamaSource.ctx.fillRect(xBar, yBar, 200, 25)
+        GamaSource.ctx.fillRect(xBar, yBar, (GamaSource.window.WIDTH * 0.2), 25)
 
         if (this.skill.getUsed())
             GamaSource.ctx.fillStyle = GameMath.randomInteger(0,100) % 2 == 0 ? "#FFD830" : "#F4F279"
@@ -175,7 +179,7 @@ export default class Player extends GameObject {
         else
             GamaSource.ctx.fillStyle = "#FFD830"
 
-        GamaSource.ctx.fillRect(xBar, yBar, 200 * this.skill.getPorcentSkill(), 25)
+        GamaSource.ctx.fillRect(xBar, yBar, (GamaSource.window.WIDTH * 0.2) * this.skill.getPorcentSkill(), 25)
 
     }
 

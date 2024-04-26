@@ -27,7 +27,7 @@ export default class Bar extends GameObject {
 
     private getIndexPostion(index:number) {
 
-        const sizeBar = 50
+        const sizeBar = GamaSource.window.WIDTH * 0.01
 
         const yindex = [
             0,

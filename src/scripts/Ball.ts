@@ -4,7 +4,7 @@ import Player from "./Player";
 
 export default class Ball extends GameObject {
 
-    private sprite = new SquareSprite(50, 50, "#fff")
+    private sprite = new SquareSprite(GamaSource.window.WIDTH  * 0.04, GamaSource.window.WIDTH  * 0.04, "#fff")
     private collider = new BoxCollider2D()
     private direction = new Vector2(0, 0)
     private lastCollision:GameObject | null = null
