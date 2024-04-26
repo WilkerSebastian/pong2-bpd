@@ -1,9 +1,10 @@
-import {GamaSource, GameObject} from "gamasource"
+import { AudioPlayer, GamaSource, GameObject} from "gamasource"
 import Player from "./scripts/Player"
 import Ball from "./scripts/Ball"
 import Bar from "./scripts/Bar"
 import Boote from "./scripts/Boote"
 import { selectSkill } from "./ui/selectSkill"
+import reborn from "./assets/audio/reborn.wav"
 
 const game = new GamaSource({
     background: "#000"
@@ -11,7 +12,19 @@ const game = new GamaSource({
 
 GamaSource.globalEnv.set("timeRunning", true)
 
+GamaSource.loader(reborn)
+
 game.addScene("main", () => {
+
+    const background = new AudioPlayer("reborn.wav", 100)
+
+    background.setEventEnd(() => {
+
+        background.playTo(11, 52)
+
+    })
+
+    background.playTo(0, 52)
 
     GameObject.create(Player)
 
