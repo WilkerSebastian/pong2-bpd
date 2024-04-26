@@ -1,15 +1,38 @@
-import { GamaSource, GameMath } from "gamasource";
+import { GamaSource, GameMath, GameObject } from "gamasource";
 import Player from "./Player";
+import { SkillTypes } from "./Skill";
+import Ball from "./Ball";
 
 export default class Boote extends Player {
 
     private timeDecision = 0
     private direction = 0
+    private skillType:SkillTypes
+
+    constructor() {
+        super()
+
+        const rand = GameMath.randomInteger(0, 100)
+
+        if (rand <= 25)
+            this.skillType = "BIG_STICK"
+
+        else if (rand <= 50)
+            this.skillType = "BREAK_TIME"
+        
+        else if (rand <= 75)
+            this.skillType = "VECTOR_FREEDOM"
+            
+        else 
+            this.skillType = "ZAAS"
+
+    }
 
     start(): void {
+        
         super.start()
 
-        this.skill.setSkill("BIG_STICK")
+        this.skill.setSkill(this.skillType)
 
     }
 
@@ -19,23 +42,27 @@ export default class Boote extends Player {
 
         this.timeDecision++
 
-        if (this.timeDecision >= 50) {
+        if (this.timeDecision >= 250) {
 
-            const rand = GameMath.randomInteger(0, 100)
+            const correct = GameMath.randomInteger(0, 100) % 5 == 0
 
-            if (rand > 50)
-                this.skill.use()
-    
-            if (rand <= 40)
-                this.direction = 1
+            const ball = GameObject.getElementByTag<Ball>("BALL")!
 
-            else if (rand <= 80)
-                this.direction = -1
+            if (correct) {
 
-            else
-                this.direction = 0
+                if (this.skill.getPorcentSkill() == 1)
+                    this.skill.use() 
 
-            this.timeDecision = 0
+                if (this.transform.y > ball.transform.y)
+                    this.direction = -1
+                
+                else if (this.transform.y < ball.transform.y)
+                    this.direction = 1
+
+                else
+                    this.direction = 0
+
+            }
 
         }
 

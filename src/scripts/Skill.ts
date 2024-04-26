@@ -38,9 +38,9 @@ export default class Skill {
 
                 break;
              case "VECTOR_FREEDOM":
-                    this.vector_freedom()
-    
-                    break;
+                this.vector_freedom()
+
+                break;
         }
 
         this.used = true

@@ -10,7 +10,6 @@ const game = new GamaSource({
 })
 
 GamaSource.globalEnv.set("timeRunning", true)
-GamaSource.globalEnv.set("boote", false)
 
 game.addScene("main", () => {
 
@@ -43,6 +42,8 @@ document.querySelectorAll<HTMLButtonElement>(".btn-option").forEach(b => b.addEv
 
             document.getElementById("skill-select")!.style.display = "none"
 
+            GamaSource.globalEnv.set("boote", false)
+
             game.run()
 
             break;
@@ -52,6 +53,8 @@ document.querySelectorAll<HTMLButtonElement>(".btn-option").forEach(b => b.addEv
             GamaSource.globalEnv.set("player1_skill", await selectSkill(true))
 
             document.getElementById("skill-select")!.style.display = "none"
+
+            GamaSource.globalEnv.set("boote", true)
 
             game.run()
 
