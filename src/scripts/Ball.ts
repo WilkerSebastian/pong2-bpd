@@ -14,6 +14,8 @@ export default class Ball extends GameObject {
 
         this.tag = "BALL"
 
+        this.velocity.set(5,5)
+
         this.transform.set(GamaSource.window.WIDTH / 2, GamaSource.window.HEIGHT / 2)
 
         this.direction.set(
@@ -85,6 +87,8 @@ export default class Ball extends GameObject {
                     this.transform.x += overY
 
             }
+
+            this.velocity = this.velocity.multiply(1.1)
 
         }
 

@@ -24,6 +24,8 @@ export default class Player extends GameObject {
         this.transform.set(this.player1 ? GamaSource.window.WIDTH * 0.1 : GamaSource.window.WIDTH * 0.9, GamaSource.window.HEIGHT / 2)
         this.tag = this.player1 ? "player1" : "player2"
 
+        this.skill.setSkill(this.player1 ? GamaSource.globalEnv.get("player1_skill") : GamaSource.globalEnv.get("player2_skill"))
+
         this.setComponent("Rendering", this.sprite)
         this.setComponent("Collision", this.collider)
 

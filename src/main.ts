@@ -3,6 +3,7 @@ import Player from "./scripts/Player"
 import Ball from "./scripts/Ball"
 import Bar from "./scripts/Bar"
 import Boote from "./scripts/Boote"
+import { selectSkill } from "./ui/selectSkill"
 
 const game = new GamaSource({
     background: "#000"
@@ -28,7 +29,7 @@ game.addScene("main", () => {
 
 })
 
-document.querySelectorAll<HTMLButtonElement>(".btn-option").forEach(b => b.addEventListener("click", () => {
+document.querySelectorAll<HTMLButtonElement>(".btn-option").forEach(b => b.addEventListener("click", async() => {
 
     const res = b.getAttribute("res")!
 
@@ -36,7 +37,11 @@ document.querySelectorAll<HTMLButtonElement>(".btn-option").forEach(b => b.addEv
 
         case "pvp":
 
-            document.getElementById("main-menu")!.style.display = "none"
+            GamaSource.globalEnv.set("player1_skill", await selectSkill(true))
+
+            GamaSource.globalEnv.set("player2_skill", await selectSkill(false))
+
+            document.getElementById("skill-select")!.style.display = "none"
 
             game.run()
 
@@ -44,9 +49,9 @@ document.querySelectorAll<HTMLButtonElement>(".btn-option").forEach(b => b.addEv
 
         case "pia":
 
-            document.getElementById("main-menu")!.style.display = "none"
+            GamaSource.globalEnv.set("player1_skill", await selectSkill(true))
 
-            GamaSource.globalEnv.set("boote", true)
+            document.getElementById("skill-select")!.style.display = "none"
 
             game.run()
 
